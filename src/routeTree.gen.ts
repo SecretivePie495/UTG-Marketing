@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as SuccessRouteImport } from './routes/success'
 import { Route as TermsRouteImport } from './routes/terms'
+import { Route as ThankYouRouteImport } from './routes/thank-you'
 import { Route as ApiIntakeRouteImport } from './routes/api/intake'
 
 const IndexRoute = IndexRouteImport.update({
@@ -35,6 +36,11 @@ const TermsRoute = TermsRouteImport.update({
   path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ThankYouRoute = ThankYouRouteImport.update({
+  id: '/thank-you',
+  path: '/thank-you',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiIntakeRoute = ApiIntakeRouteImport.update({
   id: '/api/intake',
   path: '/api/intake',
@@ -46,6 +52,7 @@ export interface FileRoutesByFullPath {
   '/privacy': typeof PrivacyRoute
   '/success': typeof SuccessRoute
   '/terms': typeof TermsRoute
+  '/thank-you': typeof ThankYouRoute
   '/api/intake': typeof ApiIntakeRoute
 }
 export interface FileRoutesByTo {
@@ -53,6 +60,7 @@ export interface FileRoutesByTo {
   '/privacy': typeof PrivacyRoute
   '/success': typeof SuccessRoute
   '/terms': typeof TermsRoute
+  '/thank-you': typeof ThankYouRoute
   '/api/intake': typeof ApiIntakeRoute
 }
 export interface FileRoutesById {
@@ -61,14 +69,23 @@ export interface FileRoutesById {
   '/privacy': typeof PrivacyRoute
   '/success': typeof SuccessRoute
   '/terms': typeof TermsRoute
+  '/thank-you': typeof ThankYouRoute
   '/api/intake': typeof ApiIntakeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/privacy' | '/success' | '/terms' | '/api/intake'
+  fullPaths:
+    '/' | '/privacy' | '/success' | '/terms' | '/thank-you' | '/api/intake'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/privacy' | '/success' | '/terms' | '/api/intake'
-  id: '__root__' | '/' | '/privacy' | '/success' | '/terms' | '/api/intake'
+  to: '/' | '/privacy' | '/success' | '/terms' | '/thank-you' | '/api/intake'
+  id:
+    | '__root__'
+    | '/'
+    | '/privacy'
+    | '/success'
+    | '/terms'
+    | '/thank-you'
+    | '/api/intake'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -76,6 +93,7 @@ export interface RootRouteChildren {
   PrivacyRoute: typeof PrivacyRoute
   SuccessRoute: typeof SuccessRoute
   TermsRoute: typeof TermsRoute
+  ThankYouRoute: typeof ThankYouRoute
   ApiIntakeRoute: typeof ApiIntakeRoute
 }
 
@@ -109,6 +127,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/thank-you': {
+      id: '/thank-you'
+      path: '/thank-you'
+      fullPath: '/thank-you'
+      preLoaderRoute: typeof ThankYouRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/intake': {
       id: '/api/intake'
       path: '/api/intake'
@@ -124,6 +149,7 @@ const rootRouteChildren: RootRouteChildren = {
   PrivacyRoute: PrivacyRoute,
   SuccessRoute: SuccessRoute,
   TermsRoute: TermsRoute,
+  ThankYouRoute: ThankYouRoute,
   ApiIntakeRoute: ApiIntakeRoute,
 }
 export const routeTree = rootRouteImport

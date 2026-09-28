@@ -18,8 +18,6 @@ export default defineConfig({
     // nitro/vite builds from this
     server: {
     allowedHosts: true, entry: "server" },
-    router: { basepath: "/pl" },
   },
   nitro: { preset: "netlify" },
-  vite: { base: "/pl/" },
 });

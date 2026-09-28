@@ -21,4 +21,5 @@ export default defineConfig({
     router: { basepath: "/pl" },
   },
   nitro: { preset: "netlify" },
+  vite: { base: "/pl/" },
 });

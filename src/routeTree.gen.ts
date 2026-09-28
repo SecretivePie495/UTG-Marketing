@@ -10,43 +10,73 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ThankYouRouteImport } from './routes/thank-you'
+import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as SuccessRouteImport } from './routes/success'
+import { Route as TermsRouteImport } from './routes/terms'
+import { Route as ApiIntakeRouteImport } from './routes/api/intake'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ThankYouRoute = ThankYouRouteImport.update({
-  id: '/thank-you',
-  path: '/thank-you',
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SuccessRoute = SuccessRouteImport.update({
+  id: '/success',
+  path: '/success',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiIntakeRoute = ApiIntakeRouteImport.update({
+  id: '/api/intake',
+  path: '/api/intake',
   getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/thank-you': typeof ThankYouRoute
+  '/privacy': typeof PrivacyRoute
+  '/success': typeof SuccessRoute
+  '/terms': typeof TermsRoute
+  '/api/intake': typeof ApiIntakeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/thank-you': typeof ThankYouRoute
+  '/privacy': typeof PrivacyRoute
+  '/success': typeof SuccessRoute
+  '/terms': typeof TermsRoute
+  '/api/intake': typeof ApiIntakeRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/thank-you': typeof ThankYouRoute
+  '/privacy': typeof PrivacyRoute
+  '/success': typeof SuccessRoute
+  '/terms': typeof TermsRoute
+  '/api/intake': typeof ApiIntakeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/thank-you'
+  fullPaths: '/' | '/privacy' | '/success' | '/terms' | '/api/intake'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/thank-you'
-  id: '__root__' | '/' | '/thank-you'
+  to: '/' | '/privacy' | '/success' | '/terms' | '/api/intake'
+  id: '__root__' | '/' | '/privacy' | '/success' | '/terms' | '/api/intake'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  ThankYouRoute: typeof ThankYouRoute
+  PrivacyRoute: typeof PrivacyRoute
+  SuccessRoute: typeof SuccessRoute
+  TermsRoute: typeof TermsRoute
+  ApiIntakeRoute: typeof ApiIntakeRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -58,11 +88,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/thank-you': {
-      id: '/thank-you'
-      path: '/thank-you'
-      fullPath: '/thank-you'
-      preLoaderRoute: typeof ThankYouRouteImport
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/success': {
+      id: '/success'
+      path: '/success'
+      fullPath: '/success'
+      preLoaderRoute: typeof SuccessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/intake': {
+      id: '/api/intake'
+      path: '/api/intake'
+      fullPath: '/api/intake'
+      preLoaderRoute: typeof ApiIntakeRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -70,7 +121,10 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  ThankYouRoute: ThankYouRoute,
+  PrivacyRoute: PrivacyRoute,
+  SuccessRoute: SuccessRoute,
+  TermsRoute: TermsRoute,
+  ApiIntakeRoute: ApiIntakeRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

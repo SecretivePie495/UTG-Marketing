@@ -10,30 +10,11 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as PrivacyRouteImport } from './routes/privacy'
-import { Route as SuccessRouteImport } from './routes/success'
-import { Route as TermsRouteImport } from './routes/terms'
 import { Route as ThankYouRouteImport } from './routes/thank-you'
-import { Route as ApiIntakeRouteImport } from './routes/api/intake'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PrivacyRoute = PrivacyRouteImport.update({
-  id: '/privacy',
-  path: '/privacy',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SuccessRoute = SuccessRouteImport.update({
-  id: '/success',
-  path: '/success',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TermsRoute = TermsRouteImport.update({
-  id: '/terms',
-  path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ThankYouRoute = ThankYouRouteImport.update({
@@ -41,60 +22,31 @@ const ThankYouRoute = ThankYouRouteImport.update({
   path: '/thank-you',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiIntakeRoute = ApiIntakeRouteImport.update({
-  id: '/api/intake',
-  path: '/api/intake',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/privacy': typeof PrivacyRoute
-  '/success': typeof SuccessRoute
-  '/terms': typeof TermsRoute
   '/thank-you': typeof ThankYouRoute
-  '/api/intake': typeof ApiIntakeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/privacy': typeof PrivacyRoute
-  '/success': typeof SuccessRoute
-  '/terms': typeof TermsRoute
   '/thank-you': typeof ThankYouRoute
-  '/api/intake': typeof ApiIntakeRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/privacy': typeof PrivacyRoute
-  '/success': typeof SuccessRoute
-  '/terms': typeof TermsRoute
   '/thank-you': typeof ThankYouRoute
-  '/api/intake': typeof ApiIntakeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    '/' | '/privacy' | '/success' | '/terms' | '/thank-you' | '/api/intake'
+  fullPaths: '/' | '/thank-you'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/privacy' | '/success' | '/terms' | '/thank-you' | '/api/intake'
-  id:
-    | '__root__'
-    | '/'
-    | '/privacy'
-    | '/success'
-    | '/terms'
-    | '/thank-you'
-    | '/api/intake'
+  to: '/' | '/thank-you'
+  id: '__root__' | '/' | '/thank-you'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  PrivacyRoute: typeof PrivacyRoute
-  SuccessRoute: typeof SuccessRoute
-  TermsRoute: typeof TermsRoute
   ThankYouRoute: typeof ThankYouRoute
-  ApiIntakeRoute: typeof ApiIntakeRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -106,27 +58,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/privacy': {
-      id: '/privacy'
-      path: '/privacy'
-      fullPath: '/privacy'
-      preLoaderRoute: typeof PrivacyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/success': {
-      id: '/success'
-      path: '/success'
-      fullPath: '/success'
-      preLoaderRoute: typeof SuccessRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/terms': {
-      id: '/terms'
-      path: '/terms'
-      fullPath: '/terms'
-      preLoaderRoute: typeof TermsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/thank-you': {
       id: '/thank-you'
       path: '/thank-you'
@@ -134,23 +65,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ThankYouRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/intake': {
-      id: '/api/intake'
-      path: '/api/intake'
-      fullPath: '/api/intake'
-      preLoaderRoute: typeof ApiIntakeRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  PrivacyRoute: PrivacyRoute,
-  SuccessRoute: SuccessRoute,
-  TermsRoute: TermsRoute,
   ThankYouRoute: ThankYouRoute,
-  ApiIntakeRoute: ApiIntakeRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

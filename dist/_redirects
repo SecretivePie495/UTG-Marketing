@@ -1,3 +1,4 @@
 /pl/assets/* https://magnificent-chebakia-02cd72.netlify.app/assets/:splat 200
 /pl/* https://magnificent-chebakia-02cd72.netlify.app/pl/:splat 200
+/pl https://magnificent-chebakia-02cd72.netlify.app/pl/ 200!
 

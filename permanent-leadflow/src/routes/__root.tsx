@@ -120,6 +120,7 @@ function RootShell({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <head>
+        <script src="/oaiq-pixel.js" async></script>
         <HeadContent />
       </head>
       <body>

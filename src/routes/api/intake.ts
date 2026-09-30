@@ -41,6 +41,10 @@ export const Route = createFileRoute("/api/intake")({
 
         const record = { id, ...parsed.data };
 
+        // Server-side conversion pixel (no-op until OAIQ_API_KEY is set).
+        const { fireLeadCreated } = await import("@/lib/oaiq-conversion");
+        fireLeadCreated({ eventId: id, sourceUrl: request.url });
+
         // Optional: forward to an n8n (or any) webhook. Set
         // N8N_INTAKE_WEBHOOK_URL via the secrets tool to enable.
         const webhookUrl = process.env.N8N_INTAKE_WEBHOOK_URL;

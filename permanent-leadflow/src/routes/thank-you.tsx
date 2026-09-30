@@ -27,6 +27,15 @@ export const Route = createFileRoute("/thank-you")({
       { name: "twitter:card", content: "summary" },
     ],
   }),
+  loader: async () => {
+    if (typeof document !== "undefined") return null;
+    const { fireLeadCreated } = await import("@/lib/oaiq-conversion");
+    fireLeadCreated({
+      eventId: `pl_${Date.now().toString(36)}${Math.random().toString(36).slice(2, 8)}`,
+      sourceUrl: "https://utgmedia.com/pl/thank-you",
+    });
+    return null;
+  },
   component: ThankYouPage,
 });
 

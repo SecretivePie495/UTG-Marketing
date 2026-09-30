@@ -27,7 +27,13 @@ export function fireLeadCreated(opts: { eventId: string; sourceUrl: string }) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(payload),
-  }).catch(() => {
-    // Never let conversion tracking break the funnel.
-  });
+  })
+    .then((res) => {
+      console.log(`[oaiq] lead_created ${opts.eventId} -> HTTP ${res.status}`);
+      return res.text();
+    })
+    .then((text) => console.log(`[oaiq] response: ${text.slice(0, 200)}`))
+    .catch(() => {
+      // Never let conversion tracking break the funnel.
+    });
 }

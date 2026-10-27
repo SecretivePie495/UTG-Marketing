@@ -126,6 +126,11 @@ function RootShell({ children }: { children: ReactNode }) {
     <html lang="en">
       <head>
         <script src="/oaiq-pixel.js" async></script>
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5351726694140140"
+          crossOrigin="anonymous"
+        ></script>
         <HeadContent />
       </head>
       <body>

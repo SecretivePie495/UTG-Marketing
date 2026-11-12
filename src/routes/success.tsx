@@ -48,6 +48,15 @@ function SuccessPage() {
     }
   }, [hydrated]);
 
+  const cardOnFile =
+    hydrated && new URLSearchParams(window.location.search).get("card") === "on-file";
+  const plan =
+    summary?.industry === "Painting"
+      ? "painting"
+      : summary?.industry === "Holiday / Permanent Lighting"
+        ? "lighting"
+        : null;
+
   return (
     <div className="mx-auto max-w-xl px-5 py-16 sm:py-24">
       <div className="rounded-2xl border border-border/70 bg-card p-8 text-center shadow-lg shadow-black/[0.03] sm:p-10">
@@ -78,6 +87,31 @@ function SuccessPage() {
               </p>
             )}
           </div>
+        )}
+
+        {cardOnFile ? (
+          <p className="mt-8 rounded-xl border border-primary/30 bg-primary/5 p-5 text-sm font-medium text-foreground">
+            Card saved. You're active — leads start coming as soon as they're generated in your
+            area. You're only charged per lead delivered.
+          </p>
+        ) : (
+          plan && (
+            <div className="mt-8 rounded-xl border border-primary/30 bg-primary/5 p-5">
+              <p className="text-sm font-semibold text-foreground">Start getting leads now</p>
+              <p className="mt-1 text-sm text-muted-foreground">
+                {plan === "painting"
+                  ? "Put your card on file — $0 today. You're charged $80 only when a lead is delivered. Cancel anytime."
+                  : "Put your card on file — $50 today covers your first lead, then $50 per lead delivered. Cancel anytime."}
+              </p>
+              <Button asChild size="lg" className="mt-4 h-12 w-full text-base">
+                <a
+                  href={`/api/card?plan=${plan}&email=${encodeURIComponent(summary?.leadEmail ?? "")}`}
+                >
+                  Put card on file & activate
+                </a>
+              </Button>
+            </div>
+          )
         )}
 
         <div className="mt-8">

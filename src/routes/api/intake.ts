@@ -45,6 +45,19 @@ export const Route = createFileRoute("/api/intake")({
         const { fireLeadCreated } = await import("@/lib/oaiq-conversion");
         fireLeadCreated({ eventId: id, sourceUrl: request.url });
 
+        // Meta Conversions API "Lead" (no-op until META_CAPI_TOKEN is set).
+        const { fireMetaLead } = await import("@/lib/meta-capi");
+        const cookies = request.headers.get("cookie") ?? "";
+        const cookie = (k: string) => cookies.match(new RegExp(`(?:^|; )${k}=([^;]+)`))?.[1];
+        await fireMetaLead(parsed.data, {
+          eventId: id,
+          sourceUrl: request.headers.get("referer") ?? request.url,
+          ip: request.headers.get("x-nf-client-connection-ip") ?? request.headers.get("x-forwarded-for")?.split(",")[0],
+          ua: request.headers.get("user-agent"),
+          fbp: cookie("_fbp"),
+          fbc: cookie("_fbc"),
+        });
+
         // Optional: forward to an n8n (or any) webhook. Set
         // N8N_INTAKE_WEBHOOK_URL via the secrets tool to enable.
         const webhookUrl = process.env.N8N_INTAKE_WEBHOOK_URL;

@@ -22,6 +22,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
+import { trackMetaLead } from "@/lib/meta-pixel";
 import { Field, inputErrorClass, RequiredStar, SectionHeading } from "@/components/intake/field";
 import { ProgressIndicator, STEPS, STEP_FIELDS } from "@/components/intake/progress-indicator";
 import { FIELD_INPUT_CLASS, StepFinalDetails, StepLeadDelivery } from "@/components/intake/steps";
@@ -184,6 +185,7 @@ export function IntakeForm() {
           /* ignore parse errors */
         }
         if (!res.ok || !json?.ok) throw new Error("Submission failed");
+        trackMetaLead(payload, json.id);
 
         try {
           const summary = {

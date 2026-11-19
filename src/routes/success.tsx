@@ -100,7 +100,7 @@ function SuccessPage() {
               <p className="text-sm font-semibold text-foreground">Start getting leads now</p>
               <p className="mt-1 text-sm text-muted-foreground">
                 {plan === "painting"
-                  ? "Put your card on file — $0 today. You're charged $80 only when a lead is delivered. Cancel anytime."
+                  ? "Put your card on file — $80 today covers your first lead, then $80 per lead delivered. Cancel anytime."
                   : "Put your card on file — $50 today covers your first lead, then $50 per lead delivered. Cancel anytime."}
               </p>
               <Button asChild size="lg" className="mt-4 h-12 w-full text-base">
